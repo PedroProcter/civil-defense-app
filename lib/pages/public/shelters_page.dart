@@ -81,29 +81,70 @@ class CivilDefenseShelterTile extends StatelessWidget {
   }
 }
 
-class CivilDefenseSheltersList extends StatelessWidget {
+class CivilDefenseSheltersList extends StatefulWidget {
   final List civilDefenseShelters;
 
   const CivilDefenseSheltersList(
       {super.key, required this.civilDefenseShelters});
 
   @override
+  State<CivilDefenseSheltersList> createState() =>
+      _CivilDefenseSheltersListState();
+}
+
+class _CivilDefenseSheltersListState extends State<CivilDefenseSheltersList> {
+  List filterShelters = [];
+
+  @override
+  void initState() {
+    filterShelters = widget.civilDefenseShelters.toList();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: civilDefenseShelters.length,
-      itemBuilder: (BuildContext context, int index) {
-        Shelter shelter = civilDefenseShelters[index];
-        return CivilDefenseShelterTile(
-          city: shelter.city,
-          code: shelter.code,
-          building: shelter.building,
-          coordinator: shelter.coordinator,
-          phoneNumber: shelter.phoneNumber,
-          capacity: shelter.capacity,
-          lat: shelter.lat,
-          lon: shelter.lon,
-        );
-      },
+    return Column(
+      children: [
+        TextField(
+          onChanged: (value) {
+            filterShelters.clear();
+            for (int i = 0; i < widget.civilDefenseShelters.length; i++) {
+              Shelter shelter = widget.civilDefenseShelters[i];
+              if (value.isEmpty) {
+                filterShelters = widget.civilDefenseShelters.toList();
+              } else {
+                if (shelter.city.toLowerCase().contains(value.toLowerCase())) {
+                  filterShelters.add(shelter);
+                }
+              }
+            }
+
+            setState(() {});
+          },
+          decoration: const InputDecoration(
+            border: OutlineInputBorder(),
+            hintText: 'Enter a search term',
+          ),
+        ),
+        Expanded(
+          child: ListView.builder(
+            itemCount: filterShelters.length,
+            itemBuilder: (BuildContext context, int index) {
+              Shelter shelter = filterShelters[index];
+              return CivilDefenseShelterTile(
+                city: shelter.city,
+                code: shelter.code,
+                building: shelter.building,
+                coordinator: shelter.coordinator,
+                phoneNumber: shelter.phoneNumber,
+                capacity: shelter.capacity,
+                lat: shelter.lat,
+                lon: shelter.lon,
+              );
+            },
+          ),
+        ),
+      ],
     );
   }
 }
