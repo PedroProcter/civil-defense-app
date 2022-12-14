@@ -40,6 +40,8 @@ dependencies:
   url_launcher: ^6.1.7
   flutter_map: ^3.0.0
   latlong2: ^0.8.1
+  fwfh_webview: ^0.6.2+5
+  flutter_widget_from_html_core: ^0.9.0+2
 
 dev_dependencies:
   flutter_test:
