@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:civil_defense_app/models/preventive_measurement.dart';
+import 'package:civil_defense_app/pages/public/home.dart';
 import 'package:civil_defense_app/pages/public/indetail/preventive_measurement_page.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -50,11 +51,21 @@ class CivilDefensePreventiveMeasurementTile extends StatelessWidget {
           ),
         );
       },
-      child: Column(
-        children: [
-          Text(title),
-          Image(image: NetworkImage(photoUrl)),
-        ],
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Center(
+          child: Column(
+            children: [
+              Text(title,
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+              SizedBox(height: 20),
+              Image(
+                image: NetworkImage(photoUrl),
+                height: 200,
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -89,6 +100,11 @@ class PreventiveMeasuresPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          title: Text('Medidas Preventivas'),
+          backgroundColor: Color(0xfffd6c00),
+        ),
+        drawer: appDrawer(),
         body: FutureBuilder(
           builder: (ctx, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {

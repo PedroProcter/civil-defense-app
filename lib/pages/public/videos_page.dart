@@ -40,16 +40,25 @@ class CivilDefenseVideoTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text(title),
-        Text(date),
-        HtmlWidget(
-          '<iframe src="https://www.youtube.com/embed/$code"></iframe>',
-          factoryBuilder: () => MyWidgetFactory(),
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Center(
+        child: Column(
+          children: [
+            Text(title,
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+            SizedBox(height: 15.0),
+            Text(date, style: TextStyle(fontSize: 15)),
+            SizedBox(height: 15.0),
+            HtmlWidget(
+              '<iframe src="https://www.youtube.com/embed/$code"></iframe>',
+              factoryBuilder: () => MyWidgetFactory(),
+            ),
+            SizedBox(height: 15.0),
+            Text(description),
+          ],
         ),
-        Text(description),
-      ],
+      ),
     );
   }
 }
@@ -83,6 +92,10 @@ class VideosPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          title: Text('Videos'),
+          backgroundColor: Color(0xfffd6c00),
+        ),
         body: FutureBuilder(
           builder: (ctx, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {

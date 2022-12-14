@@ -65,18 +65,55 @@ class CivilDefenseShelterTile extends StatelessWidget {
           ),
         );
       },
-      child: Column(
-        children: [
-          Text(city),
-          Text(code),
-          Text(building),
-          Text(coordinator),
-          Text(phoneNumber),
-          Text(capacity),
-          Text(lat),
-          Text(lon),
-        ],
-      ),
+      child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  city,
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  textAlign: TextAlign.center,
+                ),
+                Text(
+                  code,
+                  style: TextStyle(fontSize: 20),
+                  textAlign: TextAlign.center,
+                ),
+                Text(
+                  building,
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  textAlign: TextAlign.center,
+                ),
+                Text(
+                  coordinator,
+                  style: TextStyle(fontSize: 20),
+                  textAlign: TextAlign.center,
+                ),
+                Text(
+                  phoneNumber,
+                  style: TextStyle(fontSize: 20),
+                  textAlign: TextAlign.center,
+                ),
+                Text(
+                  capacity,
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  textAlign: TextAlign.center,
+                ),
+                Text(
+                  lat,
+                  style: TextStyle(fontSize: 20),
+                  textAlign: TextAlign.center,
+                ),
+                Text(
+                  lon,
+                  style: TextStyle(fontSize: 20),
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            ),
+          )),
     );
   }
 }
@@ -103,48 +140,55 @@ class _CivilDefenseSheltersListState extends State<CivilDefenseSheltersList> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        TextField(
-          onChanged: (value) {
-            filterShelters.clear();
-            for (int i = 0; i < widget.civilDefenseShelters.length; i++) {
-              Shelter shelter = widget.civilDefenseShelters[i];
-              if (value.isEmpty) {
-                filterShelters = widget.civilDefenseShelters.toList();
-              } else {
-                if (shelter.city.toLowerCase().contains(value.toLowerCase())) {
-                  filterShelters.add(shelter);
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Center(
+        child: Column(
+          children: [
+            TextField(
+              onChanged: (value) {
+                filterShelters.clear();
+                for (int i = 0; i < widget.civilDefenseShelters.length; i++) {
+                  Shelter shelter = widget.civilDefenseShelters[i];
+                  if (value.isEmpty) {
+                    filterShelters = widget.civilDefenseShelters.toList();
+                  } else {
+                    if (shelter.city
+                        .toLowerCase()
+                        .contains(value.toLowerCase())) {
+                      filterShelters.add(shelter);
+                    }
+                  }
                 }
-              }
-            }
 
-            setState(() {});
-          },
-          decoration: const InputDecoration(
-            border: OutlineInputBorder(),
-            hintText: 'Enter a search term',
-          ),
+                setState(() {});
+              },
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                hintText: 'Enter a search term',
+              ),
+            ),
+            Expanded(
+              child: ListView.builder(
+                itemCount: filterShelters.length,
+                itemBuilder: (BuildContext context, int index) {
+                  Shelter shelter = filterShelters[index];
+                  return CivilDefenseShelterTile(
+                    city: shelter.city,
+                    code: shelter.code,
+                    building: shelter.building,
+                    coordinator: shelter.coordinator,
+                    phoneNumber: shelter.phoneNumber,
+                    capacity: shelter.capacity,
+                    lat: shelter.lat,
+                    lon: shelter.lon,
+                  );
+                },
+              ),
+            ),
+          ],
         ),
-        Expanded(
-          child: ListView.builder(
-            itemCount: filterShelters.length,
-            itemBuilder: (BuildContext context, int index) {
-              Shelter shelter = filterShelters[index];
-              return CivilDefenseShelterTile(
-                city: shelter.city,
-                code: shelter.code,
-                building: shelter.building,
-                coordinator: shelter.coordinator,
-                phoneNumber: shelter.phoneNumber,
-                capacity: shelter.capacity,
-                lat: shelter.lat,
-                lon: shelter.lon,
-              );
-            },
-          ),
-        ),
-      ],
+      ),
     );
   }
 }
@@ -156,6 +200,10 @@ class SheltersPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          title: Text('Albergues'),
+          backgroundColor: Color(0xfffd6c00),
+        ),
         body: FutureBuilder(
           builder: (ctx, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {

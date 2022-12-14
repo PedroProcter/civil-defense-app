@@ -26,17 +26,38 @@ class ShelterPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: ListView(
-          children: [
-            Text(city),
-            Text(code),
-            Text(building),
-            Text(coordinator),
-            Text(phoneNumber),
-            Text(capacity),
-            Text(lat),
-            Text(lon),
-          ],
+        appBar: AppBar(
+          title: Text(building),
+          backgroundColor: Color(0xfffd6c00),
+        ),
+        body: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Center(
+            child: ListView(
+              children: [
+                Text('Ciudad: ' + city,
+                    style:
+                        TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
+                SizedBox(height: 5),
+                Text('Codigo: ' + code),
+                SizedBox(height: 5),
+                Text('Edificio: ' + building,
+                    style:
+                        TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
+                SizedBox(height: 5),
+                Text('Coordinador: ' + coordinator),
+                SizedBox(height: 5),
+                Text('Numero Telefonico: ' + phoneNumber),
+                SizedBox(height: 5),
+                Text('Capacidad: ' + capacity),
+                SizedBox(height: 5),
+                Text('Latitud: ' + lat),
+                SizedBox(height: 5),
+                Text('Longitud: ' + lon),
+                SizedBox(height: 5),
+              ],
+            ),
+          ),
         ),
       ),
     );

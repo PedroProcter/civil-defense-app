@@ -15,12 +15,29 @@ class PreventiveMeasurementPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: ListView(
-          children: [
-            Text(title),
-            Image(image: NetworkImage(photoUrl)),
-            Text(description),
-          ],
+        appBar: AppBar(
+          title: Text('Medidas Preventivas'),
+          backgroundColor: Color(0xfffd6c00),
+        ),
+        body: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Center(
+            child: ListView(
+              children: [
+                Text(
+                  title,
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 20),
+                Image(
+                  image: NetworkImage(photoUrl),
+                  height: 200,
+                ),
+                SizedBox(height: 20),
+                Text(description),
+              ],
+            ),
+          ),
         ),
       ),
     );

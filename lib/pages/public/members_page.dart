@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:civil_defense_app/models/member.dart';
+import 'package:civil_defense_app/pages/public/home.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -36,12 +37,34 @@ class CivilDefenseMemberTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text(name),
-        Text(position),
-        Image(image: NetworkImage(photoUrl)),
-      ],
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Center(
+        child: Column(
+          children: [
+            Text(
+              name,
+              style: TextStyle(
+                fontSize: 20,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            Text(
+              position,
+              style: TextStyle(
+                fontSize: 15,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            SizedBox(height: 15),
+            Image(
+              image: NetworkImage(photoUrl),
+              height: 200,
+            ),
+            SizedBox(height: 30),
+          ],
+        ),
+      ),
     );
   }
 }
@@ -73,6 +96,11 @@ class MembersPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          title: Text('Miembros'),
+          backgroundColor: Color(0xfffd6c00),
+        ),
+        drawer: appDrawer(),
         body: FutureBuilder(
           builder: (ctx, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {

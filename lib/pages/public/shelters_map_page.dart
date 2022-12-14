@@ -98,6 +98,8 @@ class SheltersMapPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar:
+            AppBar(title: Text('Mapas'), backgroundColor: Color(0xfffd6c00)),
         body: FutureBuilder(
           builder: (ctx, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
