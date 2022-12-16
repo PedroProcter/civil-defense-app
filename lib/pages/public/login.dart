@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:civil_defense_app/pages/public/forget_password.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 import 'home.dart';
 
@@ -11,6 +14,28 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  String id = '';
+  String password = '';
+
+  Map<String, dynamic> volunteerToJson() {
+    Map<String, dynamic> output = {
+      'cedula': id,
+      'clave': password,
+    };
+
+    return output;
+  }
+
+  Future<http.Response> sendPost(Map<String, dynamic> json) {
+    return http.post(
+      Uri.parse('https://adamix.net/defensa_civil/def/iniciar_sesion.php'),
+      // headers: <String, String>{
+      //   'Content-Type': 'application/json; charset=UTF-8',
+      // },
+      body: json,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -49,12 +74,14 @@ class _LoginPageState extends State<LoginPage> {
       return Container(
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
         child: TextField(
-          keyboardType: TextInputType.emailAddress,
+          keyboardType: TextInputType.number,
           decoration: const InputDecoration(
-              icon: Icon(Icons.email),
-              hintText: 'ejemplo@correo.com',
-              labelText: 'Correo electronico'),
-          onChanged: ((value) {}),
+              icon: Icon(Icons.perm_identity),
+              hintText: '000-0000000-0',
+              labelText: 'Cedula'),
+          onChanged: ((value) {
+            id = value;
+          }),
         ),
       );
     });
@@ -72,7 +99,9 @@ class _LoginPageState extends State<LoginPage> {
               icon: Icon(Icons.lock),
               hintText: 'Password',
               labelText: 'Password'),
-          onChanged: ((value) {}),
+          onChanged: ((value) {
+            id = value;
+          }),
         ),
       );
     });
@@ -88,9 +117,15 @@ class _LoginPageState extends State<LoginPage> {
           child: const Text('Iniciar Sesion',
               style: TextStyle(color: Color(0xFFFEFEFF))),
         ),
-        onPressed: () {
-          Navigator.pushReplacement(
-              context, MaterialPageRoute(builder: (context) => Home()));
+        onPressed: () async {
+          http.Response response = await sendPost(volunteerToJson());
+          dynamic json = jsonDecode(response.body);
+          ScaffoldMessenger.of(context)
+              .showSnackBar(SnackBar(content: Text(json['mensaje'])));
+          if (json['exito']) {
+            Navigator.pushReplacement(
+                context, MaterialPageRoute(builder: (context) => Home()));
+          }
         },
       );
     });

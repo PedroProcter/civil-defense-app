@@ -1,4 +1,5 @@
 import 'package:civil_defense_app/pages/public/about_us_page.dart';
+import 'package:civil_defense_app/pages/public/login.dart';
 import 'package:civil_defense_app/pages/public/members_page.dart';
 import 'package:civil_defense_app/pages/public/news_page.dart';
 import 'package:civil_defense_app/pages/public/preventive_measures_page.dart';
@@ -200,6 +201,20 @@ class appDrawer extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                           builder: (context) => const AboutUsPage()));
+                },
+              ),
+            ),
+            SizedBox(
+              child: InkWell(
+                child: Container(
+                  margin: const EdgeInsets.only(top: 15),
+                  padding: const EdgeInsets.only(left: 15),
+                  width: double.infinity,
+                  child: const Text('Login'),
+                ),
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => LoginPage()));
                 },
               ),
             ),
