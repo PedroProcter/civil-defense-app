@@ -340,6 +340,11 @@ class _ReportSituationPageState extends State<ReportSituationPage> {
         onPressed: () async {
           var response = await sendPost();
           print(response.statusCode);
+          if (response.statusCode == 200) {
+            dynamic json = jsonDecode(await response.stream.bytesToString());
+            ScaffoldMessenger.of(context)
+                .showSnackBar(SnackBar(content: Text(json['mensaje'])));
+          }
           print(await response.stream.bytesToString());
         },
       );
