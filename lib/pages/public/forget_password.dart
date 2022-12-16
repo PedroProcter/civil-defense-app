@@ -1,5 +1,6 @@
 import 'package:civil_defense_app/pages/public/login.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 import 'home.dart';
 
@@ -11,6 +12,28 @@ class ForgetPassword extends StatefulWidget {
 }
 
 class _ForgetPasswordState extends State<ForgetPassword> {
+  String oldPassword = '';
+  String newPassword = '';
+
+  Map<String, dynamic> situationToJson() {
+    Map<String, dynamic> output = {
+      'clave_anterior': oldPassword,
+      'clave_nueva': newPassword,
+    };
+
+    return output;
+  }
+
+  Future<http.Response> sendPost(Map<String, dynamic> json) {
+    return http.post(
+      Uri.parse('https://adamix.net/defensa_civil/def/nueva_situacion.php'),
+      // headers: <String, String>{
+      //   'Content-Type': 'application/json; charset=UTF-8',
+      // },
+      body: json,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -51,7 +74,9 @@ class _ForgetPasswordState extends State<ForgetPassword> {
               icon: Icon(Icons.lock),
               hintText: 'Password',
               labelText: 'Ultima contraseña'),
-          onChanged: ((value) {}),
+          onChanged: ((value) {
+            oldPassword = value;
+          }),
         ),
       );
     });
@@ -69,7 +94,9 @@ class _ForgetPasswordState extends State<ForgetPassword> {
               icon: Icon(Icons.lock),
               hintText: 'Password',
               labelText: 'Nueva Contraseña'),
-          onChanged: ((value) {}),
+          onChanged: ((value) {
+            newPassword = value;
+          }),
         ),
       );
     });

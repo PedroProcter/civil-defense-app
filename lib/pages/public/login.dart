@@ -124,7 +124,10 @@ class _LoginPageState extends State<LoginPage> {
               .showSnackBar(SnackBar(content: Text(json['mensaje'])));
           if (json['exito']) {
             Navigator.pushReplacement(
-                context, MaterialPageRoute(builder: (context) => AuthHome()));
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        AuthHome(token: json['datos']['token'])));
           }
         },
       );

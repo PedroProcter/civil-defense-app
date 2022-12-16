@@ -121,7 +121,8 @@ class NewsPage extends StatelessWidget {
 }
 
 class AuthNewsPage extends StatelessWidget {
-  const AuthNewsPage({super.key});
+  final String token;
+  const AuthNewsPage({super.key, required this.token});
 
   @override
   Widget build(BuildContext context) {
@@ -131,7 +132,7 @@ class AuthNewsPage extends StatelessWidget {
           title: Text('Noticias'),
           backgroundColor: Color(0xfffd6c00),
         ),
-        drawer: appDrawer(),
+        drawer: appDrawer(token: token),
         body: FutureBuilder(
           builder: (ctx, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {

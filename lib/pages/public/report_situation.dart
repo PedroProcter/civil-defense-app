@@ -1,12 +1,18 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:http/http.dart' as http;
 
 import 'home.dart';
 
 class ReportSituationPage extends StatefulWidget {
   static String id = 'login_page';
+  final String token;
+
+  const ReportSituationPage({super.key, required this.token});
 
   @override
   _ReportSituationPageState createState() => _ReportSituationPageState();
@@ -15,6 +21,36 @@ class ReportSituationPage extends StatefulWidget {
 class _ReportSituationPageState extends State<ReportSituationPage> {
   String selectedImagePath = '';
 
+  String title = '';
+  String description = '';
+  String latitud = '';
+  String longitud = '';
+
+  Map<String, dynamic> situationToJson() {
+    Map<String, dynamic> output = {
+      'cedula': title,
+      'nombre': description,
+      'apellido': latitud,
+      'correo': longitud,
+    };
+
+    return output;
+  }
+
+  Future sendPost() async {
+    var request = http.MultipartRequest('POST',
+        Uri.parse('https://adamix.net/defensa_civil/def/nueva_situacion.php'));
+    request.fields['titulo'] = title;
+    request.fields['descripcion'] = description;
+    request.fields['latitud'] = latitud;
+    request.fields['longitud'] = longitud;
+    request.fields['token'] = widget.token;
+    request.fields['foto'] = base64Image;
+    // request.files
+    //     .add(await http.MultipartFile.fromPath('foto', '${image?.path}'));
+    return await request.send();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -22,7 +58,9 @@ class _ReportSituationPageState extends State<ReportSituationPage> {
         appBar: AppBar(
             title: Text('Reportar situación'),
             backgroundColor: Color(0xfffd6c00)),
-        drawer: DrawerWithoutLogin(),
+        drawer: appDrawer(
+          token: widget.token,
+        ),
         body: Center(
           child: Column(
             children: [
@@ -43,7 +81,7 @@ class _ReportSituationPageState extends State<ReportSituationPage> {
               SizedBox(
                 height: 20,
               ),
-              selectedImagePath == ''
+              '${image?.path}' == 'null'
                   ? Image.asset(
                       'assets/images/defensa_civil_logo.png',
                       height: 200,
@@ -51,7 +89,7 @@ class _ReportSituationPageState extends State<ReportSituationPage> {
                       fit: BoxFit.fill,
                     )
                   : Image.file(
-                      File(selectedImagePath),
+                      File('${image?.path}'),
                       height: 200,
                       width: 200,
                       fit: BoxFit.fill,
@@ -87,6 +125,31 @@ class _ReportSituationPageState extends State<ReportSituationPage> {
     );
   }
 
+  File? image;
+  String base64Image = '';
+  Future pickImage() async {
+    try {
+      final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+      if (image == null) return;
+      final imageTemp = File(image.path);
+      setState(() => this.image = imageTemp);
+      base64Image = base64Encode(await image.readAsBytes());
+    } on PlatformException catch (e) {
+      print('Failed to pick image: $e');
+    }
+  }
+
+  Future takeImage() async {
+    try {
+      final image = await ImagePicker().pickImage(source: ImageSource.camera);
+      if (image == null) return;
+      final imageTemp = File(image.path);
+      setState(() => this.image = imageTemp);
+    } on PlatformException catch (e) {
+      print('Failed to pick image: $e');
+    }
+  }
+
 // Photo selector
   Future selectImage() {
     return showDialog(
@@ -108,18 +171,18 @@ class _ReportSituationPageState extends State<ReportSituationPage> {
                       children: [
                         GestureDetector(
                           onTap: () async {
-                            selectedImagePath = await selectImageFromGallery();
-                            print('Image_Path:-');
-                            print(selectedImagePath);
-                            if (selectedImagePath != '') {
-                              Navigator.pop(context);
-                              setState(() {});
-                            } else {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                      content: Text(
-                                          'No se ha seleccionado una imagen')));
-                            }
+                            await pickImage();
+                            // print('Image_Path:-');
+                            // print(selectedImagePath);
+                            // if (selectedImagePath != '') {
+                            //   Navigator.pop(context);
+                            //   setState(() {});
+                            // } else {
+                            //   ScaffoldMessenger.of(context).showSnackBar(
+                            //       SnackBar(
+                            //           content: Text(
+                            //               'No se ha seleccionado una imagen')));
+                            // }
                           },
                           child: Card(
                             elevation: 5,
@@ -139,18 +202,18 @@ class _ReportSituationPageState extends State<ReportSituationPage> {
                         ),
                         GestureDetector(
                           onTap: () async {
-                            selectedImagePath = await selectImageFromCamera();
-                            print('Image_Path:-');
-                            print(selectedImagePath);
-                            if (selectedImagePath != '') {
-                              Navigator.pop(context);
-                              setState(() {});
-                            } else {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                      content: Text(
-                                          'No se ha seleccionado una imagen')));
-                            }
+                            await takeImage();
+                            // print('Image_Path:-');
+                            // print(selectedImagePath);
+                            // if (selectedImagePath != '') {
+                            //   Navigator.pop(context);
+                            //   setState(() {});
+                            // } else {
+                            //   ScaffoldMessenger.of(context).showSnackBar(
+                            //       SnackBar(
+                            //           content: Text(
+                            //               'No se ha seleccionado una imagen')));
+                            // }
                           },
                           child: Card(
                             elevation: 5,
@@ -274,7 +337,11 @@ class _ReportSituationPageState extends State<ReportSituationPage> {
           child: Text('Enviar', style: TextStyle(color: Color(0xFFFEFEFF))),
           color: Color(0xfffd6c00),
         ),
-        onPressed: () {},
+        onPressed: () async {
+          var response = await sendPost();
+          print(response.statusCode);
+          print(await response.stream.bytesToString());
+        },
       );
     });
   }

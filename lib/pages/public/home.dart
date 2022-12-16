@@ -4,9 +4,11 @@ import 'package:civil_defense_app/pages/public/login.dart';
 import 'package:civil_defense_app/pages/public/members_page.dart';
 import 'package:civil_defense_app/pages/public/news_page.dart';
 import 'package:civil_defense_app/pages/public/preventive_measures_page.dart';
+import 'package:civil_defense_app/pages/public/report_situation.dart';
 import 'package:civil_defense_app/pages/public/shelters_page.dart';
 import 'package:civil_defense_app/pages/public/videos_page.dart';
 import 'package:civil_defense_app/pages/public/become_volunteer.dart';
+import 'package:civil_defense_app/pages/public/forget_password.dart';
 import 'package:flutter/material.dart';
 
 import 'shelters_map_page.dart';
@@ -42,7 +44,8 @@ class Home extends StatelessWidget {
 }
 
 class AuthHome extends StatelessWidget {
-  AuthHome({super.key});
+  final String token;
+  AuthHome({super.key, required this.token});
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +54,7 @@ class AuthHome extends StatelessWidget {
           title: const Text(''),
           backgroundColor: const Color(0xfffd6c00),
         ),
-        drawer: const appDrawer(),
+        drawer: appDrawer(token: token),
         body: Center(
           child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -72,7 +75,8 @@ class AuthHome extends StatelessWidget {
 }
 
 class appDrawer extends StatelessWidget {
-  const appDrawer({super.key});
+  final String token;
+  const appDrawer({super.key, required this.token});
 
   @override
   Widget build(BuildContext context) {
@@ -104,7 +108,25 @@ class appDrawer extends StatelessWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const AuthNewsPage()));
+                          builder: (context) => AuthNewsPage(token: token)));
+                },
+              ),
+            ),
+            SizedBox(
+              child: InkWell(
+                child: Container(
+                  margin: const EdgeInsets.only(top: 0),
+                  padding: const EdgeInsets.only(left: 15),
+                  width: double.infinity,
+                  child: const Text('Reportar Situacion',
+                      style: TextStyle(color: Colors.white)),
+                ),
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              ReportSituationPage(token: token)));
                 },
               ),
             ),
@@ -114,11 +136,29 @@ class appDrawer extends StatelessWidget {
                   margin: const EdgeInsets.only(top: 15),
                   padding: const EdgeInsets.only(left: 15),
                   width: double.infinity,
-                  child: const Text('Login'),
+                  child: const Text('Inicias Sesion',
+                      style: TextStyle(color: Colors.white)),
                 ),
                 onTap: () {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => LoginPage()));
+                },
+              ),
+            ),
+            SizedBox(
+              child: InkWell(
+                child: Container(
+                  margin: const EdgeInsets.only(top: 15),
+                  padding: const EdgeInsets.only(left: 15),
+                  width: double.infinity,
+                  child: const Text('Cambias Contrasena',
+                      style: TextStyle(color: Colors.white)),
+                ),
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => (ForgetPassword())));
                 },
               ),
             ),
