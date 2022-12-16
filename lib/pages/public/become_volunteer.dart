@@ -50,6 +50,7 @@ class _VolunteerPageState extends State<VolunteerPage> {
         appBar: AppBar(
             title: const Text('Quiero ser voluntario'),
             backgroundColor: const Color(0xfffd6c00)),
+        drawer: DrawerWithoutLogin(),
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,

@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:civil_defense_app/models/civil_defense_video.dart';
+import 'package:civil_defense_app/pages/public/home.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
@@ -96,6 +97,7 @@ class VideosPage extends StatelessWidget {
           title: Text('Videos'),
           backgroundColor: Color(0xfffd6c00),
         ),
+        drawer: DrawerWithoutLogin(),
         body: FutureBuilder(
           builder: (ctx, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {

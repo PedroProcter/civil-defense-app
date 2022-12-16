@@ -72,7 +72,7 @@ class AboutUsPage extends StatelessWidget {
           title: Text('Sobre nosotros'),
           backgroundColor: Color(0xfffd6c00),
         ),
-        drawer: appDrawer(),
+        drawer: DrawerWithoutLogin(),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
           child: ListView(

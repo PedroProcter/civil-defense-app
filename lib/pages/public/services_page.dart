@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:civil_defense_app/pages/public/home.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:civil_defense_app/models/civil_defense_service.dart';
@@ -73,6 +74,7 @@ class ServicesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        drawer: DrawerWithoutLogin(),
         body: FutureBuilder(
           builder: (ctx, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {

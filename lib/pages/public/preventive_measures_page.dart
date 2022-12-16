@@ -104,7 +104,7 @@ class PreventiveMeasuresPage extends StatelessWidget {
           title: Text('Medidas Preventivas'),
           backgroundColor: Color(0xfffd6c00),
         ),
-        drawer: appDrawer(),
+        drawer: DrawerWithoutLogin(),
         body: FutureBuilder(
           builder: (ctx, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {

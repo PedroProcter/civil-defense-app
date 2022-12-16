@@ -22,6 +22,7 @@ class _ReportSituationPageState extends State<ReportSituationPage> {
         appBar: AppBar(
             title: Text('Reportar situación'),
             backgroundColor: Color(0xfffd6c00)),
+        drawer: DrawerWithoutLogin(),
         body: Center(
           child: Column(
             children: [

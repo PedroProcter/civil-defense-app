@@ -26,7 +26,7 @@ class HistoryHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        drawer: appDrawer(),
+        drawer: DrawerWithoutLogin(),
         appBar: AppBar(
           title: Text('Historia'),
           backgroundColor: Color(0xffD06224),

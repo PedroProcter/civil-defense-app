@@ -66,7 +66,7 @@ class _SplashScreenState extends State<SplashScreen> {
             SizedBox(
               height: 15,
             ),
-            Image.asset('images/defensa_civil_logo.png')
+            Image.asset('assets/images/defensa_civil_logo.png')
           ]),
         ),
       ),

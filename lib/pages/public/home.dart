@@ -41,6 +41,36 @@ class Home extends StatelessWidget {
   }
 }
 
+class AuthHome extends StatelessWidget {
+  AuthHome({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          title: const Text(''),
+          backgroundColor: const Color(0xfffd6c00),
+        ),
+        drawer: const appDrawer(),
+        body: Center(
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: const [
+                Text('Defensa Civil',
+                    style: TextStyle(
+                        fontSize: 30,
+                        color: Color(0xfffd6c00),
+                        fontWeight: FontWeight.bold)),
+                Text('Republica Dominicana',
+                    style: TextStyle(
+                        fontSize: 12,
+                        color: Color(0xff5284b8),
+                        fontWeight: FontWeight.bold)),
+              ]),
+        ));
+  }
+}
+
 class appDrawer extends StatelessWidget {
   const appDrawer({super.key});
 
@@ -74,7 +104,7 @@ class appDrawer extends StatelessWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const NewsPage()));
+                          builder: (context) => const AuthNewsPage()));
                 },
               ),
             ),
@@ -84,149 +114,14 @@ class appDrawer extends StatelessWidget {
                   margin: const EdgeInsets.only(top: 15),
                   padding: const EdgeInsets.only(left: 15),
                   width: double.infinity,
-                  child: const Text('Historia',
-                      style: TextStyle(color: Colors.white)),
-                ),
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const HistoryPage()));
-                },
-              ),
-            ),
-            SizedBox(
-              child: InkWell(
-                child: Container(
-                  margin: const EdgeInsets.only(top: 15),
-                  padding: const EdgeInsets.only(left: 15),
-                  width: double.infinity,
-                  child: const Text('Medidas Preventivas',
-                      style: TextStyle(color: Colors.white)),
-                ),
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              const PreventiveMeasuresPage()));
-                },
-              ),
-            ),
-            SizedBox(
-              child: InkWell(
-                child: Container(
-                  margin: const EdgeInsets.only(top: 15),
-                  padding: const EdgeInsets.only(left: 15),
-                  width: double.infinity,
-                  child: const Text('Miembros',
-                      style: TextStyle(color: Colors.white)),
-                ),
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const MembersPage()));
-                },
-              ),
-            ),
-            SizedBox(
-              child: InkWell(
-                child: Container(
-                  margin: const EdgeInsets.only(top: 15),
-                  padding: const EdgeInsets.only(left: 15),
-                  width: double.infinity,
-                  child: const Text('Albergues',
-                      style: TextStyle(color: Colors.white)),
-                ),
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const SheltersPage()));
-                },
-              ),
-            ),
-            SizedBox(
-              child: InkWell(
-                child: Container(
-                  margin: const EdgeInsets.only(top: 15),
-                  padding: const EdgeInsets.only(left: 15),
-                  width: double.infinity,
-                  child: const Text('Mapas',
-                      style: TextStyle(color: Colors.white)),
-                ),
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const SheltersMapPage()));
-                },
-              ),
-            ),
-            SizedBox(
-              child: InkWell(
-                child: Container(
-                  margin: const EdgeInsets.only(top: 15),
-                  padding: const EdgeInsets.only(left: 15),
-                  width: double.infinity,
-                  child: const Text('Videos',
-                      style: TextStyle(color: Colors.white)),
-                ),
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const VideosPage()));
-                },
-              ),
-            ),
-            SizedBox(
-              child: InkWell(
-                child: Container(
-                  margin: const EdgeInsets.only(top: 15),
-                  padding: const EdgeInsets.only(left: 15),
-                  width: double.infinity,
-                  child: const Text('Quiero ser voluntario',
-                      style: TextStyle(color: Colors.white)),
+                  child: const Text('Login'),
                 ),
                 onTap: () {
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => VolunteerPage()));
+                      MaterialPageRoute(builder: (context) => LoginPage()));
                 },
               ),
             ),
-            SizedBox(
-              child: InkWell(
-                child: Container(
-                  margin: const EdgeInsets.only(top: 15),
-                  padding: const EdgeInsets.only(left: 15),
-                  width: double.infinity,
-                  child: const Text('Sobre nosotros',
-                      style: TextStyle(color: Colors.white)),
-                ),
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const AboutUsPage()));
-                },
-              ),
-            ),
-            // SizedBox(
-            //   child: InkWell(
-            //     child: Container(
-            //       margin: const EdgeInsets.only(top: 15),
-            //       padding: const EdgeInsets.only(left: 15),
-            //       width: double.infinity,
-            //       child: const Text('Login'),
-            //     ),
-            //     onTap: () {
-            //       Navigator.push(context,
-            //           MaterialPageRoute(builder: (context) => LoginPage()));
-            //     },
-            //   ),
-            // ),
           ],
         ),
       ),
@@ -338,6 +233,40 @@ class DrawerWithoutLogin extends StatelessWidget {
                   margin: const EdgeInsets.only(top: 15),
                   padding: const EdgeInsets.only(left: 15),
                   width: double.infinity,
+                  child: const Text('Albergues',
+                      style: TextStyle(color: Colors.white)),
+                ),
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const SheltersPage()));
+                },
+              ),
+            ),
+            SizedBox(
+              child: InkWell(
+                child: Container(
+                  margin: const EdgeInsets.only(top: 15),
+                  padding: const EdgeInsets.only(left: 15),
+                  width: double.infinity,
+                  child: const Text('Mapas',
+                      style: TextStyle(color: Colors.white)),
+                ),
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const SheltersMapPage()));
+                },
+              ),
+            ),
+            SizedBox(
+              child: InkWell(
+                child: Container(
+                  margin: const EdgeInsets.only(top: 15),
+                  padding: const EdgeInsets.only(left: 15),
+                  width: double.infinity,
                   child: const Text('Sobre nosotros',
                       style: TextStyle(color: Colors.white)),
                 ),
@@ -359,6 +288,21 @@ class DrawerWithoutLogin extends StatelessWidget {
                 onTap: () {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => LoginPage()));
+                },
+              ),
+            ),
+            SizedBox(
+              child: InkWell(
+                child: Container(
+                  margin: const EdgeInsets.only(top: 15),
+                  padding: const EdgeInsets.only(left: 15),
+                  width: double.infinity,
+                  child: const Text('Registrate',
+                      style: TextStyle(color: Colors.white)),
+                ),
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => VolunteerPage()));
                 },
               ),
             ),

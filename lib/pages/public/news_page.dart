@@ -91,6 +91,46 @@ class NewsPage extends StatelessWidget {
           title: Text('Noticias'),
           backgroundColor: Color(0xfffd6c00),
         ),
+        drawer: DrawerWithoutLogin(),
+        body: FutureBuilder(
+          builder: (ctx, snapshot) {
+            if (snapshot.connectionState == ConnectionState.done) {
+              if (snapshot.hasError) {
+                return Center(
+                  child: Text(
+                    '${snapshot.error} occurred',
+                    style: const TextStyle(fontSize: 18),
+                  ),
+                );
+              } else if (snapshot.hasData) {
+                final data = snapshot.data?.body;
+                return CivilDefenseNewsList(
+                    civilDefenseNews: jsonToCivilDefenseNews('$data'));
+              }
+            }
+
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          },
+          future: getCivilDefenseNews(),
+        ),
+      ),
+    );
+  }
+}
+
+class AuthNewsPage extends StatelessWidget {
+  const AuthNewsPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text('Noticias'),
+          backgroundColor: Color(0xfffd6c00),
+        ),
         drawer: appDrawer(),
         body: FutureBuilder(
           builder: (ctx, snapshot) {

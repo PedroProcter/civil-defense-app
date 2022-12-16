@@ -100,7 +100,7 @@ class _LoginPageState extends State<LoginPage> {
               hintText: 'Password',
               labelText: 'Password'),
           onChanged: ((value) {
-            id = value;
+            password = value;
           }),
         ),
       );
@@ -124,7 +124,7 @@ class _LoginPageState extends State<LoginPage> {
               .showSnackBar(SnackBar(content: Text(json['mensaje'])));
           if (json['exito']) {
             Navigator.pushReplacement(
-                context, MaterialPageRoute(builder: (context) => Home()));
+                context, MaterialPageRoute(builder: (context) => AuthHome()));
           }
         },
       );

@@ -1,3 +1,4 @@
+import 'package:civil_defense_app/pages/public/home.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'dart:convert';
@@ -100,6 +101,7 @@ class SheltersMapPage extends StatelessWidget {
       child: Scaffold(
         appBar:
             AppBar(title: Text('Mapas'), backgroundColor: Color(0xfffd6c00)),
+        drawer: DrawerWithoutLogin(),
         body: FutureBuilder(
           builder: (ctx, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {

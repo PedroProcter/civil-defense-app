@@ -20,7 +20,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image.asset(
-                'images/defensa_civil_logo.png',
+                'assets/images/defensa_civil_logo.png',
               ),
               SizedBox(height: 15.0),
               _lasstest_passwordTextField(),

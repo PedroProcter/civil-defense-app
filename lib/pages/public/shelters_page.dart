@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:civil_defense_app/models/shelter.dart';
+import 'package:civil_defense_app/pages/public/home.dart';
 import 'package:civil_defense_app/pages/public/indetail/shelter_page.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -204,6 +205,7 @@ class SheltersPage extends StatelessWidget {
           title: Text('Albergues'),
           backgroundColor: Color(0xfffd6c00),
         ),
+        drawer: DrawerWithoutLogin(),
         body: FutureBuilder(
           builder: (ctx, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
