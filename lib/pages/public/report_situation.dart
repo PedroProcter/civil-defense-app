@@ -271,7 +271,9 @@ class _ReportSituationPageState extends State<ReportSituationPage> {
           keyboardType: TextInputType.text,
           decoration: InputDecoration(
               icon: Icon(Icons.title), hintText: 'Título', labelText: 'Título'),
-          onChanged: ((value) {}),
+          onChanged: ((value) {
+            title = value;
+          }),
         ),
       );
     });
@@ -288,7 +290,9 @@ class _ReportSituationPageState extends State<ReportSituationPage> {
               icon: Icon(Icons.description),
               hintText: 'Descripción',
               labelText: 'Descripción'),
-          onChanged: ((value) {}),
+          onChanged: ((value) {
+            description = value;
+          }),
         ),
       );
     });
@@ -305,7 +309,9 @@ class _ReportSituationPageState extends State<ReportSituationPage> {
               icon: Icon(Icons.location_city),
               hintText: '00.0000000',
               labelText: 'Latitud'),
-          onChanged: ((value) {}),
+          onChanged: ((value) {
+            latitud = value;
+          }),
         ),
       );
     });
@@ -322,7 +328,9 @@ class _ReportSituationPageState extends State<ReportSituationPage> {
               icon: Icon(Icons.location_city),
               hintText: '00.0000000',
               labelText: 'Longitud'),
-          onChanged: ((value) {}),
+          onChanged: ((value) {
+            longitud = value;
+          }),
         ),
       );
     });

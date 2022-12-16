@@ -6,6 +6,8 @@ import 'package:civil_defense_app/pages/public/news_page.dart';
 import 'package:civil_defense_app/pages/public/preventive_measures_page.dart';
 import 'package:civil_defense_app/pages/public/report_situation.dart';
 import 'package:civil_defense_app/pages/public/shelters_page.dart';
+import 'package:civil_defense_app/pages/public/situations_map_page.dart';
+import 'package:civil_defense_app/pages/public/situations_page.dart';
 import 'package:civil_defense_app/pages/public/videos_page.dart';
 import 'package:civil_defense_app/pages/public/become_volunteer.dart';
 import 'package:civil_defense_app/pages/public/forget_password.dart';
@@ -127,6 +129,41 @@ class appDrawer extends StatelessWidget {
                       MaterialPageRoute(
                           builder: (context) =>
                               ReportSituationPage(token: token)));
+                },
+              ),
+            ),
+            SizedBox(
+              child: InkWell(
+                child: Container(
+                  margin: const EdgeInsets.only(top: 0),
+                  padding: const EdgeInsets.only(left: 15),
+                  width: double.infinity,
+                  child: const Text('Mis Situacion (Mapa)',
+                      style: TextStyle(color: Colors.white)),
+                ),
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              SituationsMapPage(token: token)));
+                },
+              ),
+            ),
+            SizedBox(
+              child: InkWell(
+                child: Container(
+                  margin: const EdgeInsets.only(top: 0),
+                  padding: const EdgeInsets.only(left: 15),
+                  width: double.infinity,
+                  child: const Text('Mis Situacion',
+                      style: TextStyle(color: Colors.white)),
+                ),
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => SituationsPage(token: token)));
                 },
               ),
             ),
