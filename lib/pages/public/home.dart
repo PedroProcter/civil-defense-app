@@ -97,6 +97,7 @@ class appDrawer extends StatelessWidget {
                 ),
               ),
             ),
+            SizedBox(height: 30),
             SizedBox(
               child: InkWell(
                 child: Container(
@@ -114,6 +115,7 @@ class appDrawer extends StatelessWidget {
                 },
               ),
             ),
+            SizedBox(height: 30),
             SizedBox(
               child: InkWell(
                 child: Container(
@@ -132,6 +134,7 @@ class appDrawer extends StatelessWidget {
                 },
               ),
             ),
+            SizedBox(height: 30),
             SizedBox(
               child: InkWell(
                 child: Container(
@@ -150,6 +153,7 @@ class appDrawer extends StatelessWidget {
                 },
               ),
             ),
+            SizedBox(height: 30),
             SizedBox(
               child: InkWell(
                 child: Container(
@@ -167,6 +171,7 @@ class appDrawer extends StatelessWidget {
                 },
               ),
             ),
+            SizedBox(height: 20),
             SizedBox(
               child: InkWell(
                 child: Container(
@@ -182,6 +187,7 @@ class appDrawer extends StatelessWidget {
                 },
               ),
             ),
+            SizedBox(height: 20),
             SizedBox(
               child: InkWell(
                 child: Container(
@@ -228,6 +234,7 @@ class DrawerWithoutLogin extends StatelessWidget {
                 ),
               ),
             ),
+            SizedBox(height: 30),
             SizedBox(
               child: InkWell(
                 child: Container(
@@ -243,6 +250,7 @@ class DrawerWithoutLogin extends StatelessWidget {
                 },
               ),
             ),
+            SizedBox(height: 30),
             SizedBox(
               child: InkWell(
                 child: Container(
@@ -258,6 +266,7 @@ class DrawerWithoutLogin extends StatelessWidget {
                 },
               ),
             ),
+            SizedBox(height: 30),
             SizedBox(
               child: InkWell(
                 child: Container(
@@ -275,6 +284,7 @@ class DrawerWithoutLogin extends StatelessWidget {
                 },
               ),
             ),
+            SizedBox(height: 30),
             SizedBox(
               child: InkWell(
                 child: Container(
@@ -290,6 +300,7 @@ class DrawerWithoutLogin extends StatelessWidget {
                 },
               ),
             ),
+            SizedBox(height: 30),
             SizedBox(
               child: InkWell(
                 child: Container(
@@ -305,6 +316,7 @@ class DrawerWithoutLogin extends StatelessWidget {
                 },
               ),
             ),
+            SizedBox(height: 30),
             SizedBox(
               child: InkWell(
                 child: Container(
@@ -322,6 +334,7 @@ class DrawerWithoutLogin extends StatelessWidget {
                 },
               ),
             ),
+            SizedBox(height: 30),
             SizedBox(
               child: InkWell(
                 child: Container(
@@ -339,6 +352,7 @@ class DrawerWithoutLogin extends StatelessWidget {
                 },
               ),
             ),
+            SizedBox(height: 30),
             SizedBox(
               child: InkWell(
                 child: Container(
@@ -354,6 +368,7 @@ class DrawerWithoutLogin extends StatelessWidget {
                 },
               ),
             ),
+            SizedBox(height: 30),
             SizedBox(
               child: InkWell(
                 child: Container(
@@ -369,6 +384,7 @@ class DrawerWithoutLogin extends StatelessWidget {
                 },
               ),
             ),
+            SizedBox(height: 30),
             SizedBox(
               child: InkWell(
                 child: Container(
