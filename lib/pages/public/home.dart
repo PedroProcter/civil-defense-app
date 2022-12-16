@@ -158,7 +158,8 @@ class appDrawer extends StatelessWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => (ForgetPassword())));
+                          builder: (context) =>
+                              (ForgetPassword(token: token))));
                 },
               ),
             ),

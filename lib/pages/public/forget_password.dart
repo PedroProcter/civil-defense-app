@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:civil_defense_app/pages/public/login.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -6,6 +8,9 @@ import 'home.dart';
 
 class ForgetPassword extends StatefulWidget {
   static String id = 'login_page';
+  final String token;
+
+  const ForgetPassword({super.key, required this.token});
 
   @override
   _ForgetPasswordState createState() => _ForgetPasswordState();
@@ -17,6 +22,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
 
   Map<String, dynamic> situationToJson() {
     Map<String, dynamic> output = {
+      'token': widget.token,
       'clave_anterior': oldPassword,
       'clave_nueva': newPassword,
     };
@@ -26,7 +32,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
 
   Future<http.Response> sendPost(Map<String, dynamic> json) {
     return http.post(
-      Uri.parse('https://adamix.net/defensa_civil/def/nueva_situacion.php'),
+      Uri.parse('https://adamix.net/defensa_civil/def/cambiar_clave.php'),
       // headers: <String, String>{
       //   'Content-Type': 'application/json; charset=UTF-8',
       // },
@@ -112,7 +118,11 @@ class _ForgetPasswordState extends State<ForgetPassword> {
               Text('Enviar datos', style: TextStyle(color: Color(0xFFFEFEFF))),
           color: Color(0xfffd6c00),
         ),
-        onPressed: () {
+        onPressed: () async {
+          http.Response response = await sendPost(situationToJson());
+          dynamic json = jsonDecode(response.body);
+          ScaffoldMessenger.of(context)
+              .showSnackBar(SnackBar(content: Text(json['mensaje'])));
           Navigator.pushReplacement(
               context, MaterialPageRoute(builder: (context) => LoginPage()));
         },

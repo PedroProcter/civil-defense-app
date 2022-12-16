@@ -16,6 +16,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   String id = '';
   String password = '';
+  String token = '';
 
   Map<String, dynamic> volunteerToJson() {
     Map<String, dynamic> output = {
@@ -145,8 +146,10 @@ class _LoginPageState extends State<LoginPage> {
               style: TextStyle(color: Color(0xFFFEFEFF))),
         ),
         onPressed: () {
-          Navigator.pushReplacement(context,
-              MaterialPageRoute(builder: (context) => ForgetPassword()));
+          Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => ForgetPassword(token: token)));
         },
       );
     });
