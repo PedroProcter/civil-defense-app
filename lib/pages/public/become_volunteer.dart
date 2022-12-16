@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 import 'home.dart';
 
@@ -10,39 +13,69 @@ class VolunteerPage extends StatefulWidget {
 }
 
 class _VolunteerPageState extends State<VolunteerPage> {
+  String id = '';
+  String name = '';
+  String lastname = '';
+  String email = '';
+  String password = '';
+  String telephone = '';
+
+  Map<String, dynamic> volunteerToJson() {
+    Map<String, dynamic> output = {
+      'cedula': id,
+      'nombre': name,
+      'apellido': lastname,
+      'correo': email,
+      'telefono': telephone,
+      'clave': password,
+    };
+
+    return output;
+  }
+
+  Future<http.Response> sendPost(Map<String, dynamic> json) {
+    return http.post(
+      Uri.parse('https://adamix.net/defensa_civil/def/registro.php'),
+      // headers: <String, String>{
+      //   'Content-Type': 'application/json; charset=UTF-8',
+      // },
+      body: json,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-            title: Text('Quiero ser voluntario'),
-            backgroundColor: Color(0xfffd6c00)),
+            title: const Text('Quiero ser voluntario'),
+            backgroundColor: const Color(0xfffd6c00)),
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               _IDTextField(),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
               _nameTextField(),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               _lastnameTextField(),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               _emailTextField(),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               _passwordTextField(),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               _phoneTextField(),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               _setData(),
@@ -57,14 +90,16 @@ class _VolunteerPageState extends State<VolunteerPage> {
     return StreamBuilder(
         builder: (BuildContext context, AsyncSnapshot snapshot) {
       return Container(
-        padding: EdgeInsets.symmetric(horizontal: 20.0),
+        padding: const EdgeInsets.symmetric(horizontal: 20.0),
         child: TextField(
-          keyboardType: TextInputType.text,
-          decoration: InputDecoration(
+          keyboardType: TextInputType.number,
+          decoration: const InputDecoration(
               icon: Icon(Icons.perm_identity),
               hintText: '000-0000000-0',
               labelText: 'Cedula'),
-          onChanged: ((value) {}),
+          onChanged: ((value) {
+            id = value;
+          }),
         ),
       );
     });
@@ -74,14 +109,16 @@ class _VolunteerPageState extends State<VolunteerPage> {
     return StreamBuilder(
         builder: (BuildContext context, AsyncSnapshot snapshot) {
       return Container(
-        padding: EdgeInsets.symmetric(horizontal: 20.0),
+        padding: const EdgeInsets.symmetric(horizontal: 20.0),
         child: TextField(
           keyboardType: TextInputType.text,
-          decoration: InputDecoration(
+          decoration: const InputDecoration(
               icon: Icon(Icons.people_alt_outlined),
               hintText: 'Nombre',
               labelText: 'Nombre'),
-          onChanged: ((value) {}),
+          onChanged: ((value) {
+            name = value;
+          }),
         ),
       );
     });
@@ -91,14 +128,16 @@ class _VolunteerPageState extends State<VolunteerPage> {
     return StreamBuilder(
         builder: (BuildContext context, AsyncSnapshot snapshot) {
       return Container(
-        padding: EdgeInsets.symmetric(horizontal: 20.0),
+        padding: const EdgeInsets.symmetric(horizontal: 20.0),
         child: TextField(
           keyboardType: TextInputType.text,
-          decoration: InputDecoration(
+          decoration: const InputDecoration(
               icon: Icon(Icons.people_alt_outlined),
               hintText: 'Apellido',
               labelText: 'Apellido'),
-          onChanged: ((value) {}),
+          onChanged: ((value) {
+            lastname = value;
+          }),
         ),
       );
     });
@@ -108,14 +147,16 @@ class _VolunteerPageState extends State<VolunteerPage> {
     return StreamBuilder(
         builder: (BuildContext context, AsyncSnapshot snapshot) {
       return Container(
-        padding: EdgeInsets.symmetric(horizontal: 20.0),
+        padding: const EdgeInsets.symmetric(horizontal: 20.0),
         child: TextField(
           keyboardType: TextInputType.emailAddress,
-          decoration: InputDecoration(
+          decoration: const InputDecoration(
               icon: Icon(Icons.email),
               hintText: 'ejemplo@correo.com',
               labelText: 'Correo electronico'),
-          onChanged: ((value) {}),
+          onChanged: ((value) {
+            email = value;
+          }),
         ),
       );
     });
@@ -125,15 +166,16 @@ class _VolunteerPageState extends State<VolunteerPage> {
     return StreamBuilder(
         builder: (BuildContext context, AsyncSnapshot snapshot) {
       return Container(
-        padding: EdgeInsets.symmetric(horizontal: 20.0),
+        padding: const EdgeInsets.symmetric(horizontal: 20.0),
         child: TextField(
-          keyboardType: TextInputType.emailAddress,
           obscureText: true,
-          decoration: InputDecoration(
+          decoration: const InputDecoration(
               icon: Icon(Icons.lock),
               hintText: 'Password',
               labelText: 'Password'),
-          onChanged: ((value) {}),
+          onChanged: ((value) {
+            password = value;
+          }),
         ),
       );
     });
@@ -143,14 +185,16 @@ class _VolunteerPageState extends State<VolunteerPage> {
     return StreamBuilder(
         builder: (BuildContext context, AsyncSnapshot snapshot) {
       return Container(
-        padding: EdgeInsets.symmetric(horizontal: 20.0),
+        padding: const EdgeInsets.symmetric(horizontal: 20.0),
         child: TextField(
           keyboardType: TextInputType.phone,
-          decoration: InputDecoration(
+          decoration: const InputDecoration(
               icon: Icon(Icons.phone),
               hintText: '000-000-0000',
               labelText: 'Telefono'),
-          onChanged: ((value) {}),
+          onChanged: ((value) {
+            telephone = value;
+          }),
         ),
       );
     });
@@ -161,11 +205,17 @@ class _VolunteerPageState extends State<VolunteerPage> {
         builder: (BuildContext context, AsyncSnapshot snapshot) {
       return TextButton(
         child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 80.0, vertical: 15.0),
-          child: Text('Enviar', style: TextStyle(color: Color(0xFFFEFEFF))),
-          color: Color(0xfffd6c00),
+          padding: const EdgeInsets.symmetric(horizontal: 80.0, vertical: 15.0),
+          color: const Color(0xfffd6c00),
+          child:
+              const Text('Enviar', style: TextStyle(color: Color(0xFFFEFEFF))),
         ),
-        onPressed: () {},
+        onPressed: () async {
+          http.Response response = await sendPost(volunteerToJson());
+          dynamic json = jsonDecode(response.body);
+          ScaffoldMessenger.of(context)
+              .showSnackBar(SnackBar(content: Text(json['mensaje'])));
+        },
       );
     });
   }

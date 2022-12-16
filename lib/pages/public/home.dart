@@ -4,7 +4,7 @@ import 'package:civil_defense_app/pages/public/news_page.dart';
 import 'package:civil_defense_app/pages/public/preventive_measures_page.dart';
 import 'package:civil_defense_app/pages/public/shelters_page.dart';
 import 'package:civil_defense_app/pages/public/videos_page.dart';
-import 'package:civil_defense_app/pages/public/volunteer.dart';
+import 'package:civil_defense_app/pages/public/become_volunteer.dart';
 import 'package:flutter/material.dart';
 
 import 'history.dart';
@@ -17,23 +17,25 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(''),
-          backgroundColor: Color(0xfffd6c00),
+          title: const Text(''),
+          backgroundColor: const Color(0xfffd6c00),
         ),
-        drawer: appDrawer(),
+        drawer: const appDrawer(),
         body: Center(
-          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-            Text('Defensa Civil',
-                style: TextStyle(
-                    fontSize: 30,
-                    color: Color(0xfffd6c00),
-                    fontWeight: FontWeight.bold)),
-            Text('Republica Dominicana',
-                style: TextStyle(
-                    fontSize: 12,
-                    color: Color(0xff5284b8),
-                    fontWeight: FontWeight.bold)),
-          ]),
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: const [
+                Text('Defensa Civil',
+                    style: TextStyle(
+                        fontSize: 30,
+                        color: Color(0xfffd6c00),
+                        fontWeight: FontWeight.bold)),
+                Text('Republica Dominicana',
+                    style: TextStyle(
+                        fontSize: 12,
+                        color: Color(0xff5284b8),
+                        fontWeight: FontWeight.bold)),
+              ]),
         ));
   }
 }
@@ -45,7 +47,7 @@ class appDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Drawer(
       child: Container(
-        color: Color(0xffD06224),
+        color: const Color(0xffD06224),
         child: Column(
           children: [
             Padding(
@@ -67,8 +69,10 @@ class appDrawer extends StatelessWidget {
                   child: const Text('Noticias'),
                 ),
                 onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => NewsPage()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const NewsPage()));
                 },
               ),
             ),
@@ -81,8 +85,10 @@ class appDrawer extends StatelessWidget {
                   child: const Text('Historia'),
                 ),
                 onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => HistoryPage()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const HistoryPage()));
                 },
               ),
             ),
@@ -98,7 +104,8 @@ class appDrawer extends StatelessWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => PreventiveMeasuresPage()));
+                          builder: (context) =>
+                              const PreventiveMeasuresPage()));
                 },
               ),
             ),
@@ -111,8 +118,10 @@ class appDrawer extends StatelessWidget {
                   child: const Text('Miembros'),
                 ),
                 onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => MembersPage()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const MembersPage()));
                 },
               ),
             ),
@@ -125,8 +134,10 @@ class appDrawer extends StatelessWidget {
                   child: const Text('Albergues'),
                 ),
                 onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => SheltersPage()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const SheltersPage()));
                 },
               ),
             ),
@@ -142,7 +153,7 @@ class appDrawer extends StatelessWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => SheltersMapPage()));
+                          builder: (context) => const SheltersMapPage()));
                 },
               ),
             ),
@@ -155,8 +166,10 @@ class appDrawer extends StatelessWidget {
                   child: const Text('Videos'),
                 ),
                 onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => VideosPage()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const VideosPage()));
                 },
               ),
             ),
@@ -183,8 +196,10 @@ class appDrawer extends StatelessWidget {
                   child: const Text('Sobre nosotros'),
                 ),
                 onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => AboutUsPage()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const AboutUsPage()));
                 },
               ),
             ),

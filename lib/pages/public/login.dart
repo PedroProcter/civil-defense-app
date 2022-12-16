@@ -20,19 +20,19 @@ class _LoginPageState extends State<LoginPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image.asset(
-                'images/defensa_civil_logo.png',
+                'assets/images/defensa_civil_logo.png',
               ),
-              SizedBox(height: 15.0),
+              const SizedBox(height: 15.0),
               _userTextField(),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
               _passwordTextField(),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               _bottonLogin(),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               _forget_password()
@@ -47,10 +47,10 @@ class _LoginPageState extends State<LoginPage> {
     return StreamBuilder(
         builder: (BuildContext context, AsyncSnapshot snapshot) {
       return Container(
-        padding: EdgeInsets.symmetric(horizontal: 20.0),
+        padding: const EdgeInsets.symmetric(horizontal: 20.0),
         child: TextField(
           keyboardType: TextInputType.emailAddress,
-          decoration: InputDecoration(
+          decoration: const InputDecoration(
               icon: Icon(Icons.email),
               hintText: 'ejemplo@correo.com',
               labelText: 'Correo electronico'),
@@ -64,11 +64,11 @@ class _LoginPageState extends State<LoginPage> {
     return StreamBuilder(
         builder: (BuildContext context, AsyncSnapshot snapshot) {
       return Container(
-        padding: EdgeInsets.symmetric(horizontal: 20.0),
+        padding: const EdgeInsets.symmetric(horizontal: 20.0),
         child: TextField(
           keyboardType: TextInputType.emailAddress,
           obscureText: true,
-          decoration: InputDecoration(
+          decoration: const InputDecoration(
               icon: Icon(Icons.lock),
               hintText: 'Password',
               labelText: 'Password'),
@@ -83,10 +83,10 @@ class _LoginPageState extends State<LoginPage> {
         builder: (BuildContext context, AsyncSnapshot snapshot) {
       return TextButton(
         child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 80.0, vertical: 15.0),
-          child: Text('Iniciar Sesion',
+          padding: const EdgeInsets.symmetric(horizontal: 80.0, vertical: 15.0),
+          color: const Color(0xfffd6c00),
+          child: const Text('Iniciar Sesion',
               style: TextStyle(color: Color(0xFFFEFEFF))),
-          color: Color(0xfffd6c00),
         ),
         onPressed: () {
           Navigator.pushReplacement(
@@ -101,10 +101,10 @@ class _LoginPageState extends State<LoginPage> {
         builder: (BuildContext context, AsyncSnapshot snapshot) {
       return TextButton(
         child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 80.0, vertical: 15.0),
-          child: Text('Recuperar conseña',
+          padding: const EdgeInsets.symmetric(horizontal: 80.0, vertical: 15.0),
+          color: const Color(0xfffd6c00),
+          child: const Text('Recuperar conseña',
               style: TextStyle(color: Color(0xFFFEFEFF))),
-          color: Color(0xfffd6c00),
         ),
         onPressed: () {
           Navigator.pushReplacement(context,
